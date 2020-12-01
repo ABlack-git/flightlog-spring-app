@@ -1,6 +1,5 @@
 package eu.profinit.education.flightlog.dao;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +22,9 @@ public class ClubDatabaseDaoImplTest {
     @Autowired
     private ClubDatabaseDao testSubject;
 
-    @Ignore("Test is ignored because it requires clubDB server to run.")
+
     @Test
     public void getUsers(){
-        // TODO 5.3: odstraňte @Ignore a spusťte test proti testovacímu prostředí ClubDB.
         List<User> users = testSubject.getUsers();
 
         assertNotNull(users);

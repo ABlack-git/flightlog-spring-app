@@ -16,13 +16,14 @@ import eu.profinit.education.flightlog.to.FlightTo;
 import eu.profinit.education.flightlog.to.FlightTuppleTo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -107,14 +108,13 @@ public class FlightServiceImpl implements FlightService {
     @Transactional(readOnly = true)
     @Override
     public List<FlightTo> getFlightsInTheAir() {
-        // TODO 2.5: načtěte lety ve vzduchu pomocí vaší nové metody ve FlightRepository
-        // Můžete použít Java 8 Stream API pro konverzi na Transfer Object (TO)
-        return new ArrayList<>();
+        return flightRepository.findAllByLandingTimeIsNullOrderByTakeoffTimeAscIdAsc().stream().map(FlightTo::fromEntity).collect(Collectors.toList());
     }
 
     @Override
     public List<FlightTuppleTo> getFlightsForReport() {
-        // TODO 8.2: Nactete dvojice letu pro obrazovku report
-        return new ArrayList<>();
+        return flightRepository.findAllByFlightTypeOrderByTakeoffTimeDescIdAsc(Flight.Type.TOWPLANE).stream()
+            .map(flight -> new FlightTuppleTo(FlightTo.fromEntity(flight), FlightTo.fromEntity(flight.getGliderFlight())))
+            .collect(Collectors.toList());
     }
 }

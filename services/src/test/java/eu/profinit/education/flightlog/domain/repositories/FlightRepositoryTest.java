@@ -2,7 +2,6 @@ package eu.profinit.education.flightlog.domain.repositories;
 
 import eu.profinit.education.flightlog.IntegrationTestConfig;
 import eu.profinit.education.flightlog.domain.entities.Flight;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,20 +33,16 @@ public class FlightRepositoryTest {
 
     }
 
-    @Ignore("Testovana metoda neni implementovana")
     @Test
     public void shouldLoadGliderFlights() {
-        // TODO 2.2: Zmente volanou testovaci metodu, aby vratila vsechny lety kluzaku a smažte anotaci @Ignore
-        List<Flight> flights = testSubject.findAll();
+        List<Flight> flights = testSubject.findAllByFlightTypeOrderByTakeoffTimeDescIdAsc(Flight.Type.GLIDER);
 
         assertEquals("There should be 2 glider flights", 2, flights.size());
     }
 
-    @Ignore("Testovana metoda neni implementovana")
     @Test
     public void shouldLoadFlightsInTheAir() {
-        // TODO 2.4: Doplňte název testované metody a smažte anotaci @Ignore
-        List<Flight> flights = null;// testSubject.*
+        List<Flight> flights = testSubject.findAllByLandingTimeIsNullOrderByTakeoffTimeAscIdAsc();
 
         assertEquals("There should be 3 flights", 3, flights.size());
         assertEquals("Flight with ID 5 started first and should be first", 5L, flights.get(0).getId().getId().longValue());

@@ -6,8 +6,8 @@ import eu.profinit.education.flightlog.domain.entities.Person;
 import eu.profinit.education.flightlog.domain.repositories.PersonRepository;
 import eu.profinit.education.flightlog.to.AddressTo;
 import eu.profinit.education.flightlog.to.PersonTo;
+
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.AdditionalAnswers;
@@ -34,7 +34,7 @@ public class PersonServiceTest {
     private PersonServiceImpl testSubject;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         testSubject = new PersonServiceImpl(personRepository, clubDatabaseDao);
     }
 
@@ -89,11 +89,26 @@ public class PersonServiceTest {
 
     }
 
-    @Ignore("Test is not implemented")
+
     @Test
     public void shouldCreateNewClubMember() {
-        // TODO 7.1: Naimplementujte unit test s pouzitim mocku
+        PersonTo personTo = PersonTo.builder()
+            .firstName("Tester")
+            .lastName("Testerov")
+            .memberId(1L)
+            .build();
+        User testUser = new User(1L, "Tester", "Testerov", Arrays.asList("PILOT"));
 
+        when(clubDatabaseDao.getUsers()).thenReturn(Arrays.asList(testUser));
+        when(personRepository.findByMemberId(testUser.getMemberId())).thenReturn(Optional.empty());
+        when(personRepository.save(any())).thenAnswer(AdditionalAnswers.returnsFirstArg());
+
+        Person person = testSubject.getExistingOrCreatePerson(personTo);
+
+        assertEquals(personTo.getMemberId(), person.getMemberId());
+        assertEquals(personTo.getFirstName(), person.getFirstName());
+        assertEquals(personTo.getLastName(), person.getLastName());
+        assertEquals(Person.Type.CLUB_MEMBER, person.getPersonType());
     }
 
 

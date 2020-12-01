@@ -27,7 +27,7 @@ import static lombok.AccessLevel.PACKAGE;
 @Entity
 @Table(name = FLIGHT)
 @SequenceGenerator(name = Sequences.FLIGHT, sequenceName = Sequences.FLIGHT, initialValue = JpaConstants.Sequences.INITIAL_VALUE)
-@NoArgsConstructor(access = PACKAGE)
+@NoArgsConstructor()
 @Getter
 @Setter
 @ToString
