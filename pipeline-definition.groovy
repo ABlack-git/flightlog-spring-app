@@ -18,6 +18,11 @@ pipeline {
             }
         }
         stage('Test') {
+            when {
+                not {
+                    expression { params.SKIP_TESTS }
+                }
+            }
             steps {
                 dir('.') {
                     script {
