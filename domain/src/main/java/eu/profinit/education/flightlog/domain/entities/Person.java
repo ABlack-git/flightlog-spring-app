@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+
 import org.apache.commons.lang3.ObjectUtils;
 
 import javax.persistence.Entity;
@@ -63,5 +64,15 @@ public class Person {
 
     public String getFullName() {
         return (ObjectUtils.defaultIfNull(firstName, "") + " " + ObjectUtils.defaultIfNull(lastName, "")).trim();
+    }
+
+    public String getFullAddress() {
+        if (address == null){
+            return "";
+        }
+        return (ObjectUtils.defaultIfNull(address.getStreet(), "")
+            + " " + ObjectUtils.defaultIfNull(getAddress().getCity(), "")
+            + " " + ObjectUtils.defaultIfNull(getAddress().getPostalCode(), "")
+            + " " + ObjectUtils.defaultIfNull(getAddress().getCountry(), "")).trim();
     }
 }

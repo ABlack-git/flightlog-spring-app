@@ -12,10 +12,7 @@ public interface FlightRepository extends JpaRepository<Flight, Long> {
 
 
     List<Flight> findAllByLandingTimeIsNullOrderByTakeoffTimeAscIdAsc();
-    // Lety by se měly řadit od nejstarších a v případě shody podle ID tak, aby vlečná byla před kluzákem, který táhne
-    // Výsledek si můžete ověřit v testu k této tříde v modulu service
 
-    // TODO 8.1: Vytvorte metodu pro nacteni vlecnych letu pro vytvoreni dvojice letu na obrazovce Report
     List<Flight> findAllOrderBy();
 }
 

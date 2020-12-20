@@ -1,0 +1,6 @@
+flightId,flightType,airplaneImmatriculation,crew,task,takeoffTime,landingTime
+3,TOWPLANE,OK-V23424,"Řehoř Novák, Kamila Spoustová",VLEK,24.10.2018 17:30:00,23.10.2018 19:30:00
+3,GLIDER,OK-B123,"Naděžda Pavelková, Řehoř Novák",1A,24.10.2018 17:30:00,23.10.2018 17:30:00
+1,TOWPLANE,OK-V23424,Kamila Spoustová,VLEK,23.10.2018 13:30:00,
+1,GLIDER,OK-B123,Kamila Spoustová,,23.10.2018 13:30:00,
+5,TOWPLANE,OK-123,Kamila Spoustová,,22.10.2018 12:30:00,
